@@ -1,5 +1,6 @@
 package com.syz.security.common.biz;
 
+
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.syz.security.common.msg.TableResultResponse;
@@ -14,7 +15,6 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Created by Mr.AG
  * Date: 17/1/13
  * Time: 15:13
  * Version 1.0.0

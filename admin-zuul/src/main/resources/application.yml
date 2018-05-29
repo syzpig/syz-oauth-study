@@ -4,15 +4,17 @@ spring:
 
 
 
+#配置路由
 zuul:
-  prefix: /api # 拦截所有以api大头的请求都经过zuul路由
-  routes: # todo 路由表定义
-    user-center:
+#/api/uc/user/test --> user-center   /user/test   stripPrefix不设置时，不加uc前缀
+#/api/uc/user/test --> user-center   /uc/user/test
+#/api/admin/user/test   /admin/user/test stripPrefix:false
+  prefix: /api #为zuul设置一个公共的前缀 所有请求的前缀  如果routes不p配置就是api/user-center/user/test
+  routes:
+    uc:
       path: /uc/**
       serviceId: user-center
-    auht-server:
-      path: /auth/**
-      serviceId: ag-auth
+#      stripPrefix: false  # 设置为false 不移除前缀 uc  就是访问时加uc  #/api/uc/user/test  ----/uc/user/test
 
 
 eureka:
@@ -23,14 +25,3 @@ eureka:
 server:
   port: 8766
 
-
-jwt:
-  token-header: access-token
-  ignore-url: /auth/jwt
-  pub-key:
-    path: /Users/ace/git/ag-parent/ag-zuul/src/main/resources/jwt/pub.key
-
-client:
-  token-header: client-token
-  id: ag-gate
-  secret: 123456

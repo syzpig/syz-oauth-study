@@ -3,6 +3,34 @@ server:
 spring:
   application:
     name: user-center
+  datasource:
+      name: test
+      url: jdbc:mysql://localhost:3306/admin_study?useUnicode=true&characterEncoding=UTF8
+      username: root
+      password: root
+      # 使用druid数据源
+      type: com.alibaba.druid.pool.DruidDataSource
+      driver-class-name: com.mysql.jdbc.Driver
+      filters: stat
+      maxActive: 20
+      initialSize: 1
+      maxWait: 60000
+      minIdle: 1
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: select 'x'
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      maxOpenPreparedStatements: 20
+
+mybatis:
+    basepackage: com.syz.security.user.mapper
+    xmlLocation: classpath:mapper/**/*.xml
+logging:
+  level:
+    com.github.wxiaoqi.learning.uc.mapper: debug
 #\u6CE8\u518C\u5230\u6CE8\u518C\u4E2D\u5FC3
 eureka:
   client:
