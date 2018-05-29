@@ -18,6 +18,7 @@
         <module>admin-common</module>
         <module>admin-gate</module>
         <module>admin-user</module>
+        <module>admin-zuul</module>
     </modules>
     <packaging>pom</packaging>
     <properties>
