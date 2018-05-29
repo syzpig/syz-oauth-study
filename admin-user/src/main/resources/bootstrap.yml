@@ -1,0 +1,10 @@
+#配置配置中心
+spring:
+  cloud:
+    config:
+      discovery:
+        service-id: admin-config  #指定配置中心的service-id，便于扩展为高可用配置集群。
+        enabled: true
+      label: master  #{label}对应git上不同的分支，默认为master。  对应git的分支。如果配置中心使用的是本地存储，则该参数无用
+      name: uc    #对应{application}部分
+      profile: dev   #对应{profile}部分

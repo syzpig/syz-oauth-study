@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: admin-config
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/syzpig/syz-Config.git #  \u914D\u7F6E\u6587\u4EF6\u53EA\u641C\u7D22url\u76EE\u5F55\u4E0B\u7684searchPaths
+
+          # \u6307\u5B9A\u641C\u7D22\u8DEF\u5F84\uFF0C\u5982\u679C\u6709\u591A\u4E2A\u8DEF\u5F84\u5219\u4F7F\u7528,\u5206\u9694
+          #searchPaths: cloud-config-git/simple2/configspecial,cloud-config-git/simple2/default
+          # \u5BF9\u4E8E\u4F7F\u7528git,svn\u505A\u4E3A\u540E\u7AEF\u914D\u7F6E\uFF0C\u4ECE\u8FDC\u7A0B\u5E93\u83B7\u53D6\u914D\u7F6E\u6587\u4EF6\uFF0C\u9700\u8981\u5B58\u50A8\u5230\u672C\u5730\u6587\u4EF6
+          #basedir: /tmp/spring-cloud-repo
+          # \u914D\u7F6E\u4E2D\u5FC3\u901A\u8FC7git\u4ECE\u8FDC\u7A0Bgit\u5E93\uFF0C\u6709\u65F6\u672C\u5730\u7684\u62F7\u8D1D\u88AB\u6C61\u67D3\uFF0C\u8FD9\u65F6\u914D\u7F6E\u4E2D\u5FC3\u65E0\u6CD5\u4ECE\u8FDC\u7A0B\u5E93\u66F4\u65B0\u672C\u5730\u914D\u7F6E,\u8BBE\u7F6Eforce-pull=true\uFF0C\u5219\u5F3A\u5236\u4ECE\u8FDC\u7A0B\u5E93\u4E2D\u66F4\u65B0\u672C\u5730\u5E93
+          #force-pull: true
+server:
+  port: 8750 #\u542F\u52A8\u7AEF\u53E3
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
