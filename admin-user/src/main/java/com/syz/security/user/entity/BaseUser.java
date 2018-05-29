@@ -1,10 +1,12 @@
 package com.syz.security.user.entity;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.Objects;
 import javax.persistence.*;
 
 @Table(name = "base_user")
-public class BaseUser {
+public class BaseUser implements Serializable {
     @Id
     private Integer id;
 
@@ -478,5 +480,22 @@ public class BaseUser {
      */
     public void setAttr8(String attr8) {
         this.attr8 = attr8;
+    }
+
+    //给是唯一性属性的字段添加equals和hashCode验证，防止在做set合集，当做set操作时无法去重，做到唯一性
+    //这里打id和username做唯一处理  （快捷键右键，选择Generate）
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        BaseUser baseUser = (BaseUser) o;
+        return Objects.equals(id, baseUser.id) &&
+                Objects.equals(username, baseUser.username);
+    }
+
+    @Override
+    public int hashCode() {
+
+        return Objects.hash(id, username);
     }
 }

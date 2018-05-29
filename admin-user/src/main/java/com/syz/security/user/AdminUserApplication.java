@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
 @EnableEurekaClient  //用于发现eureka客户端
-@EnableDiscoveryClient  //让服务使用eureka服务器
+//@EnableDiscoveryClient  //让服务使用eureka服务器  使用任意一个即可，建议使用这个
 @MapperScan("com.syz.security.user.mapper")
 @EnableTransactionManagement
 public class AdminUserApplication {

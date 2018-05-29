@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * ${DESCRIPTION}
- *
+ *用于返回页面是表格的数据封装
  * @author
  * @create 2017-06-14 22:40
  */
