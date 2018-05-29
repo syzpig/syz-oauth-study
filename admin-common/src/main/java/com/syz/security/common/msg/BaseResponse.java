@@ -1,4 +1,4 @@
-package com.syz.security.common.vo;
+package com.syz.security.common.msg;
 
 /**
  * Created by ace on 2017/8/23.

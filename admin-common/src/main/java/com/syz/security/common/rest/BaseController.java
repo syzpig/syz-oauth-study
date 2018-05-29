@@ -1,10 +1,11 @@
 package com.syz.security.common.rest;
 
 import com.syz.security.common.biz.BaseBiz;
+import com.syz.security.common.msg.ObjectRestResponse;
+import com.syz.security.common.msg.TableResultResponse;
 import com.syz.security.common.util.Query;
-import com.syz.security.common.vo.ObjectRestResponse;
-import com.syz.security.common.vo.TableResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.Base64Utils;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -33,7 +34,7 @@ public class BaseController<Biz extends BaseBiz,Entity> {
     @RequestMapping(value = "/{id}",method = RequestMethod.GET)
     @ResponseBody
     public ObjectRestResponse<Entity> get(@PathVariable int id){
-        return new ObjectRestResponse<Entity>().rel(true).data(baseBiz.selectById(id));
+        return new ObjectRestResponse<Entity>().result((Entity) baseBiz.selectById(id));
     }
 
     @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
@@ -60,5 +61,9 @@ public class BaseController<Biz extends BaseBiz,Entity> {
         //查询列表数据
         Query query = new Query(params);
         return baseBiz.selectByQuery(query);
+    }
+    public String getCurrentUserName(){
+        String authorization = request.getHeader("Authorization");
+        return new String(Base64Utils.decodeFromString(authorization));
     }
 }

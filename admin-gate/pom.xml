@@ -8,7 +8,9 @@
 		<artifactId>syz-oauth-study</artifactId>
 		<version>1.0-SNAPSHOT</version>
 	</parent>
+
 	<artifactId>admin-gate</artifactId>
+
 	<dependencies>
 		<!--HTTP2作为新的HTTP标准，目前在Undertow上已经可以被很好地支持了，而在代码中只需要配置下，就可以启用HTTP2作为web的协议-->
 		<dependency>
@@ -23,16 +25,15 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
-
-	<!--	<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-redis</artifactId>
-		</dependency>-->
 		<dependency>
 			<groupId>com.syz.security</groupId>
 			<artifactId>admin-common</artifactId>
 			<version>1.0-SNAPSHOT</version>
 		</dependency>
+		<!--<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>-->
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-feign</artifactId>

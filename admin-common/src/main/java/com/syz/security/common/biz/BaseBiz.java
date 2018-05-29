@@ -2,9 +2,9 @@ package com.syz.security.common.biz;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-
+import com.syz.security.common.msg.TableResultResponse;
+import com.syz.security.common.util.EntityUtils;
 import com.syz.security.common.util.Query;
-import com.syz.security.common.vo.TableResultResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.entity.Example;
@@ -13,6 +13,12 @@ import java.lang.reflect.ParameterizedType;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Created by Mr.AG
+ * Date: 17/1/13
+ * Time: 15:13
+ * Version 1.0.0
+ */
 public abstract class BaseBiz<M extends Mapper<T>, T> {
     @Autowired
     protected M mapper;
@@ -47,11 +53,13 @@ public abstract class BaseBiz<M extends Mapper<T>, T> {
 
 
     public void insert(T entity) {
+        EntityUtils.setCreatAndUpdatInfo(entity);
         mapper.insert(entity);
     }
 
 
     public void insertSelective(T entity) {
+        EntityUtils.setCreatAndUpdatInfo(entity);
         mapper.insertSelective(entity);
     }
 
@@ -67,11 +75,13 @@ public abstract class BaseBiz<M extends Mapper<T>, T> {
 
 
     public void updateById(T entity) {
+        EntityUtils.setUpdatedInfo(entity);
         mapper.updateByPrimaryKey(entity);
     }
 
 
     public void updateSelectiveById(T entity) {
+        EntityUtils.setUpdatedInfo(entity);
         mapper.updateByPrimaryKeySelective(entity);
 
     }
