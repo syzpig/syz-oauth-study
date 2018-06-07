@@ -11,6 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 @EnableZuulProxy
 @EnableEurekaClient
 @EnableFeignClients
+@ComponentScan("com.syz.security.zuul")
 public class AdminZuulApplication {
 
 	public static void main(String[] args) {

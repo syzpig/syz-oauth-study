@@ -1,8 +1,8 @@
-## syz-admin-study
-##springcloud 用户权限框架学习搭建
-#搭建步骤：
-#一、基础框架搭建(详细配置请参考代码)
-**1.注册中心服务搭建**   
+## syz-admin-study   
+##springcloud 用户权限框架学习搭建     
+#搭建步骤：     
+#一、基础框架搭建(详细配置请参考代码)     
+**1.注册中心服务搭建**    
 主要引入架包：   
          <dependency>
               <groupId>org.springframework.cloud</groupId>

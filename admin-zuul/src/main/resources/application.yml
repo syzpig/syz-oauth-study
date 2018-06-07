@@ -25,3 +25,9 @@ eureka:
 server:
   port: 8766
 
+jwt:
+  key: xxxxxx1
+  expireTime: 3000
+  pub-key: path:/Users/ace/git/ag-parent/ag-auth/src/main/resources/client/pub.key
+  pri-key: path:/Users/ace/git/ag-parent/ag-auth/src/main/resources/client/pri.key;
+                      }
