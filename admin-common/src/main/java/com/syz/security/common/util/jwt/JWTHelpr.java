@@ -14,7 +14,7 @@ import org.joda.time.DateTime;
  */
 public class JWTHelpr {
     /**
-     * 秘钥加密token   用于给网关服务用，加密   因为加密公钥在网管那里
+     * 秘钥加密生成token   用于给网关服务用，加密   因为加密公钥在网管那里
      */
     //name/account(username)/userId/expire  token中可以放这些东西
     public static String generateeToken(IJWTInfo ijwtInfo, String priKeyPath, int expireTime) throws Exception {//用于生成token
@@ -23,7 +23,7 @@ public class JWTHelpr {
                 .claim(CommonConstants.JWT_KEY_USER_ID, ijwtInfo.getUserId())  //claim用于自定义自己的key
                 .claim(CommonConstants.JWT_KEY_NAME, ijwtInfo.getName())
                 .setExpiration(DateTime.now().plusSeconds(expireTime).toDate())
-                .signWith(SignatureAlgorithm.HS512, KeyHelper.getPrivateKey(priKeyPath))  //这里的key使用公钥和秘钥
+                .signWith(SignatureAlgorithm.RS256, KeyHelper.getPrivateKey(priKeyPath))  //这里的key使用公钥和秘钥
                 .compact();
         return compactJws;
         /*我们正在构建一个将注册索赔 sub（主题）设置为的JWT Joe。我们使用SHA-512算法使用HMAC签署JWT。最后，我们正在将它压缩成其String形式。*/

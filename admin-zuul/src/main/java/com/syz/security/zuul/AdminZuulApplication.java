@@ -8,9 +8,9 @@ import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
-@EnableZuulProxy
+/*@EnableZuulProxy
 @EnableEurekaClient
-@EnableFeignClients
+@EnableFeignClients*/
 @ComponentScan("com.syz.security.zuul")
 public class AdminZuulApplication {
 

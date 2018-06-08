@@ -68,8 +68,9 @@ public class KeyHelper {
         fos.close();
     }
 
+    //生成公钥和秘钥
     public static void main(String[] args) throws IOException, NoSuchAlgorithmException {
-        generateKey("/Users/ace/git/ag-parent/ag-auth/src/main/resources/client/pub.key","/Users/ace/git/ag-parent/ag-auth/src/main/resources/client/pri.key","1*&623!f");
+        generateKey("D:\\syzSpringCloudProject\\syz_admin\\syz-oauth-study\\admin-zuul\\src\\main\\resources\\pub.key","D:\\syzSpringCloudProject\\syz_admin\\syz-oauth-study\\admin-zuul\\src\\main\\resources\\pri.key","1*&623!f");
     }
 }
 

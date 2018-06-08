@@ -12,28 +12,30 @@ import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
 
 /**
  * 创建一个秘钥
  */
-@Component
+@Configuration
 public class JWTUtil {
     private Logger logger = LoggerFactory.getLogger(JWTUtil.class);
 
-    @Value("{jwt.key}")
-    private String key;
-    @Value("{jwt.expireTime}")
+    //这个自定义key不使用，使用公钥秘钥
+    /*@Value("${jwt.key}")
+    private String key;*/
+    @Value("${jwt.expireTime}")
     private int expireTime;  //时长
-    @Value("${jwt.pub-key.path}")
+    @Value("${jwt.pub-key.path.pubKeyPath}")
     private String pubKeyPath;//获取公钥
-    @Value("${jwt.pri-key.path}")
+    @Value("${jwt.pri-key.path.priKeyPath}")
     private String priKeyPath;//获取秘钥
 
     //name/account(username)/userId/expire  token中可以放这些东西
     //IJWTInfo实际网关不一定传这个类，会根据自己定义对象传进来  这个是给网关用
-    public String generateeToken(IJWTInfo ijwtInfo, String priKeyPath) throws Exception {//用于生成token
+    public String generateeToken(IJWTInfo ijwtInfo) throws Exception {//用于生成token
         return JWTHelpr.generateeToken(ijwtInfo, priKeyPath, expireTime);
         /*我们正在构建一个将注册索赔 sub（主题）设置为的JWT Joe。我们使用SHA-512算法使用HMAC签署JWT。最后，我们正在将它压缩成其String形式。*/
     }

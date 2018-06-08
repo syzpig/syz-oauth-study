@@ -3,12 +3,12 @@ package com.syz.security.common.util.jwt;
 import java.io.Serializable;
 import java.util.Objects;
 
-public class JWTInfo implements Serializable,IJWTInfo{
+public class JWTInfo implements Serializable, IJWTInfo {
     private String userId;
     private String userName;
     private String name;
 
-    public JWTInfo(String userId, String userName, String name) {
+    public JWTInfo(String userName, String userId, String name) {
         this.userId = userId;
         this.userName = userName;
         this.name = name;

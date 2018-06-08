@@ -28,6 +28,9 @@ server:
 jwt:
   key: xxxxxx1
   expireTime: 3000
-  pub-key: path:/Users/ace/git/ag-parent/ag-auth/src/main/resources/client/pub.key
-  pri-key: path:/Users/ace/git/ag-parent/ag-auth/src/main/resources/client/pri.key;
-                      }
+  pub-key:
+    path:
+      pubKeyPath: D:\syzSpringCloudProject\syz_admin\syz-oauth-study\admin-zuul\src\main\resources\pub.key
+  pri-key:
+    path:
+      priKeyPath: D:\syzSpringCloudProject\syz_admin\syz-oauth-study\admin-zuul\src\main\resources\pri.key
