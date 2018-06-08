@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 @ResponseBody
 public class GlobalExceptionHandler {
     private Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
-    @ExceptionHandler(BaseException.class)  //自定义异常
+    @ExceptionHandler(BaseException.class)  //拦截自定义异常
     public BaseResponse baseExceptionHandler(HttpServletResponse response, BaseException ex) {
         logger.error(ex.getMessage(),ex);
         return new BaseResponse(ex.getStatus(), ex.getMessage());

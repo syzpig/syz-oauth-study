@@ -3,8 +3,6 @@ package com.syz.security.zuul;
 import com.syz.security.common.util.jwt.IJWTInfo;
 import com.syz.security.common.util.jwt.JWTInfo;
 import com.syz.security.zuul.jwt.JWTUtil;
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jws;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
