@@ -1,14 +1,14 @@
-package com.syz.security.zuul.config;
+package com.syz.security.auth.config;
 
 import com.syz.security.common.handler.GlobalExceptionHandler;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 /**
- *初始化全局异常对象
+ *初始化全局异常对象  过滤异常
  */
 @Configuration  //添加psring扫描注解
-public class GateConfigtation {
+public class AuthConfigtation {
     @Bean
     public GlobalExceptionHandler globalExceptionHandler(){
         return new GlobalExceptionHandler();

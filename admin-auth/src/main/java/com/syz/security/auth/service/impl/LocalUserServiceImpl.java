@@ -1,12 +1,12 @@
-package com.syz.security.zuul.service.impl;
+package com.syz.security.auth.service.impl;
 
-import com.syz.security.zuul.bean.UserInfo;
-import com.syz.security.zuul.exception.UserInvalidException;
-import com.syz.security.zuul.service.LocalUserService;
+import com.syz.security.auth.bean.UserInfo;
+import com.syz.security.auth.exception.UserInvalidException;
+import com.syz.security.auth.service.LocalUserService;
 import org.springframework.stereotype.Service;
 
 @Service
-public class LocalUserServiceImpl implements LocalUserService{
+public class LocalUserServiceImpl implements LocalUserService {
 
     /**
      *模拟用户登陆验证

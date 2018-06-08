@@ -1,4 +1,4 @@
-package com.syz.security.zuul.exception;
+package com.syz.security.auth.exception;
 
 import com.syz.security.common.constant.CommonConstants;
 import com.syz.security.common.exception.BaseException;

@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: admin-auth
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
+
+server:
+  port: 7777
+
+jwt:
+  key: xxxxxx1
+  expireTime: 3000
+  pub-key:
+    path:
+      pubKeyPath: D:\syzSpringCloudProject\syz_admin\syz-oauth-study\admin-auth\src\main\resources\pub.key
+  pri-key:
+    path:
+      priKeyPath: D:\syzSpringCloudProject\syz_admin\syz-oauth-study\admin-auth\src\main\resources\pri.key

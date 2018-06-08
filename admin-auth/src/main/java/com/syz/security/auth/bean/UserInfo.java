@@ -1,4 +1,4 @@
-package com.syz.security.zuul.bean;
+package com.syz.security.auth.bean;
 
 import com.syz.security.common.util.jwt.IJWTInfo;
 
