@@ -5,7 +5,6 @@ import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.syz.security.common.constant.CommonConstants;
 import com.syz.security.common.msg.BaseResponse;
-import com.syz.security.common.msg.ObjectRestResponse;
 import com.syz.security.common.util.jwt.IJWTInfo;
 import com.syz.security.zuul.jwt.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;

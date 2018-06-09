@@ -38,4 +38,9 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
 
 
-
+jwt:
+  token-header:
+    jwtTokenHeader: access-token
+  pub-key:
+    path:
+      pubKeyPath: D:\syzSpringCloudProject\syz_admin\syz-oauth-study\admin-user\src\main\resources\pub.key
