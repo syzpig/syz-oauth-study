@@ -1,7 +1,7 @@
 package com.syz.security.auth.rest;
 
 import com.syz.security.auth.bean.UserInfo;
-import com.syz.security.auth.jwt.JWTUtil;
+import com.syz.security.auth.util.JWTUtil;
 import com.syz.security.auth.service.LocalUserService;
 import com.syz.security.common.msg.ObjectRestResponse;
 import org.springframework.beans.factory.annotation.Autowired;

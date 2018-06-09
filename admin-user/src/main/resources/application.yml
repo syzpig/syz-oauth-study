@@ -43,4 +43,4 @@ jwt:
     jwtTokenHeader: access-token
   pub-key:
     path:
-      pubKeyPath: D:\syzSpringCloudProject\syz_admin\syz-oauth-study\admin-user\src\main\resources\pub.key
+      pubKeyPath: D:\syzSpringCloudProject\syz_admin\syz-oauth-study\admin-user\src\main\resources\jwt\pub.key

@@ -32,9 +32,9 @@ public class JWTInterceptor extends HandlerInterceptorAdapter{
         //公钥验证用户token ,并解析token，获取用户信息
         IJWTInfo infoFromToken = jwtUtil.getInfoFromToken(token);
         //把用户信息放入全局当前操作信息类中，供服务使用，在用户退出时清空
-        BaseContextHandler.setUsername(infoFromToken.getUserName());
+        BaseContextHandler.setUsername(infoFromToken.getUniqueName());
         BaseContextHandler.setUsername(infoFromToken.getName());
-        BaseContextHandler.setUserID(infoFromToken.getUserId());
+        BaseContextHandler.setUserID(infoFromToken.getId());
         return super.preHandle(request,response,handler);
     }
 }

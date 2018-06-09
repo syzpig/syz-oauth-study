@@ -14,7 +14,7 @@ public class JWTInfo implements Serializable, IJWTInfo {
         this.name = name;
     }
 
-    public String getUserId() {
+    public String getId() {
         return userId;
     }
 
@@ -22,7 +22,7 @@ public class JWTInfo implements Serializable, IJWTInfo {
         this.userId = userId;
     }
 
-    public String getUserName() {
+    public String getUniqueName() {
         return userName;
     }
 

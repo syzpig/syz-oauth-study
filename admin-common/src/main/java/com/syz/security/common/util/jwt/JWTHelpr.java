@@ -19,8 +19,8 @@ public class JWTHelpr {
     //name/account(username)/userId/expire  token中可以放这些东西
     public static String generateeToken(IJWTInfo ijwtInfo, String priKeyPath, int expireTime) throws Exception {//用于生成token
         String compactJws = Jwts.builder()
-                .setSubject(ijwtInfo.getUserName())   //subject可用于定义用户名
-                .claim(CommonConstants.JWT_KEY_USER_ID, ijwtInfo.getUserId())  //claim用于自定义自己的key
+                .setSubject(ijwtInfo.getUniqueName())   //subject可用于定义用户名
+                .claim(CommonConstants.JWT_KEY_USER_ID, ijwtInfo.getId())  //claim用于自定义自己的key
                 .claim(CommonConstants.JWT_KEY_NAME, ijwtInfo.getName())
                 .setExpiration(DateTime.now().plusSeconds(expireTime).toDate())
                 .signWith(SignatureAlgorithm.RS256, KeyHelper.getPrivateKey(priKeyPath))  //这里的key使用公钥和秘钥

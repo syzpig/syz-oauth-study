@@ -4,11 +4,11 @@ public interface IJWTInfo {
     /**
      *获取用户名
      */
-    String getUserName();
+    String getUniqueName();
     /**
      *获取用户Id
      */
-    String getUserId();
+    String getId();
     /**
      *获取名称
      */

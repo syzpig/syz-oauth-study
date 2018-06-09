@@ -20,12 +20,12 @@ public class UserInfo implements IJWTInfo {
     }
 
     @Override
-    public String getUserName() {
+    public String getUniqueName() {
         return username;
     }
 
     @Override
-    public String getUserId() {
+    public String getId() {
         return userId;
     }
 

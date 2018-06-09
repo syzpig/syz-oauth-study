@@ -1,4 +1,4 @@
-package com.syz.security.auth.jwt;
+package com.syz.security.auth.util;
 
 
 import com.syz.security.common.util.jwt.IJWTInfo;
@@ -10,20 +10,17 @@ import org.springframework.context.annotation.Configuration;
 
 
 /**
- * 创建一个秘钥
+ * 服务鉴权使用工具类
  */
 @Configuration
-public class JWTUtil {
-    private Logger logger = LoggerFactory.getLogger(JWTUtil.class);
+public class ClientTokenUtil {
+    private Logger logger = LoggerFactory.getLogger(ClientTokenUtil.class);
 
-    //这个自定义key不使用，使用公钥秘钥
-    /*@Value("${jwt.key}")
-    private String key;*/
-    @Value("${jwt.expireTime}")
+    @Value("${client.expireTime}")
     private int expireTime;  //时长
-    @Value("${jwt.pub-key.path.pubKeyPath}")
+    @Value("${client.pub-key.path.pubKeyPath}")
     private String pubKeyPath;//获取公钥
-    @Value("${jwt.pri-key.path.priKeyPath}")
+    @Value("${client.pri-key.path.priKeyPath}")
     private String priKeyPath;//获取秘钥
 
     //name/account(username)/userId/expire  token中可以放这些东西
