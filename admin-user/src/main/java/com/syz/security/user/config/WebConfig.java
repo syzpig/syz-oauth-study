@@ -2,6 +2,7 @@ package com.syz.security.user.config;
 
 import com.syz.security.common.handler.GlobalExceptionHandler;
 import com.syz.security.user.interceptor.ClientInterceptor;
+import com.syz.security.user.interceptor.ClientTokenInterceptor;
 import com.syz.security.user.interceptor.JWTInterceptor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,6 +42,12 @@ public class WebConfig extends WebMvcConfigurerAdapter {
     @Bean
     ClientInterceptor getClientInterceptor(){
        return new ClientInterceptor();
+    }
+
+    //生效ClientTokenInterceptor拦截器
+    @Bean
+    ClientTokenInterceptor getClientTokenInterceptor(){
+        return new ClientTokenInterceptor();
     }
 
 
