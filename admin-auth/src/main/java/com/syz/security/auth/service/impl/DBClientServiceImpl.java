@@ -3,9 +3,9 @@ package com.syz.security.auth.service.impl;
 
 import com.syz.security.auth.bean.ClientInfo;
 import com.syz.security.auth.entity.Client;
-import com.syz.security.auth.exception.ClientInvalidException;
 import com.syz.security.auth.mapper.ClientMapper;
 import com.syz.security.auth.service.ClientService;
+import com.syz.security.common.exception.auth.ClientInvalidException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

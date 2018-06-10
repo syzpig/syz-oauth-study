@@ -44,3 +44,12 @@ jwt:
   pub-key:
     path:
       pubKeyPath: D:\syzSpringCloudProject\syz_admin\syz-oauth-study\admin-user\src\main\resources\jwt\pub.key
+client:
+  id: user-center
+  secret: 123456
+  token-header:
+    tokenHeader: client-token
+  expireTime: 3000
+  pub-key:
+    path:
+      pubKeyPath: D:\syzSpringCloudProject\syz_admin\syz-oauth-study\admin-user\src\main\resources\client\pub.key

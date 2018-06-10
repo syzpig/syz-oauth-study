@@ -25,7 +25,7 @@ public class JWTCtl {
         //1.验证账户合法性
         UserInfo userInfo = localUserService.login(username, password);
         //2.合法则生成token
-        return new ObjectRestResponse<String>().result(jwtUtil.generateeToken(userInfo));
+        return new ObjectRestResponse<String>().data(jwtUtil.generateeToken(userInfo));
         //3.否则返回status 402
     }
 }

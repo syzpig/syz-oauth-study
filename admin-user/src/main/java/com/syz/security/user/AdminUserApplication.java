@@ -5,6 +5,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
+import org.springframework.cloud.netflix.feign.EnableFeignClients;
+import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
@@ -14,6 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @MapperScan("com.syz.security.user.mapper")
 @ComponentScan("com.syz.security.user")
 @EnableTransactionManagement
+@EnableFeignClients
 public class AdminUserApplication {
 
 	public static void main(String[] args) {

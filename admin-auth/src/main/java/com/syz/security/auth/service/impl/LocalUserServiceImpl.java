@@ -1,8 +1,8 @@
 package com.syz.security.auth.service.impl;
 
 import com.syz.security.auth.bean.UserInfo;
-import com.syz.security.auth.exception.UserInvalidException;
 import com.syz.security.auth.service.LocalUserService;
+import com.syz.security.common.exception.auth.UserInvalidException;
 import org.springframework.stereotype.Service;
 
 @Service

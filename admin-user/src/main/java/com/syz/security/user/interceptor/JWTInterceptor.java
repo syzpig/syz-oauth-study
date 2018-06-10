@@ -2,7 +2,10 @@ package com.syz.security.user.interceptor;
 
 import com.syz.security.common.context.BaseContextHandler;
 import com.syz.security.common.util.jwt.IJWTInfo;
+import com.syz.security.user.config.WebConfig;
 import com.syz.security.user.jwt.JWTUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
@@ -20,6 +23,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @Configuration
 public class JWTInterceptor extends HandlerInterceptorAdapter{
+    private Logger logger = LoggerFactory.getLogger(JWTInterceptor.class);
     @Value("${jwt.token-header.jwtTokenHeader}")
     private String jwtTokenHeader;
     @Autowired
@@ -27,6 +31,7 @@ public class JWTInterceptor extends HandlerInterceptorAdapter{
 
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        logger.info("start JWTInterceptor 用户认证拦截器...........");
        //获取用户请求的token
         String token = request.getHeader(jwtTokenHeader);
         //公钥验证用户token ,并解析token，获取用户信息

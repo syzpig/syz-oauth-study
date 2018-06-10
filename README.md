@@ -88,9 +88,17 @@
 ##（一）、服务鉴权中心搭建
 ### 鉴权设计中心
 ### 鉴权开发中心
-### -服务注册（秘钥派发）
-### -服务授权（大粒度）    
+### 1-服务注册（秘钥派发）
+### 2-服务授权（大粒度）    
 
-每个服务都会有一个mvc拦截器和feign，mvc进行鉴权，feign进行获取token 
-serverA 和serverB,都要去鉴权中心拿token，看详细方案，  A访问B,B会有多个资源，看那些可以访问他，简单就是一对多关系
-https://zhuanlan.zhihu.com/p/29345083   
+每个服务都会有一个mvc拦截器和feign，mvc进行鉴权，feign进行获取token      
+serverA 和serverB,都要去鉴权中心拿token，看详细方案，  A访问B,B会有多个资源，看那些可以访问他，简单就是一对多关系    
+https://zhuanlan.zhihu.com/p/29345083    
+
+##(二)、服务端agent设计 详细流程看Agent流程图.png 
+ （利用agent实现自发式的小插件，去自动获取token。自定校验token等，不用每次请求都要由开发人员去获取。）   
+###1、服务发起端（Fegin Client Interceptor）实现自发获取
+---->申请Token   
+###2、服务调用端（MVC Interceptor）
+---->校验token   
+###3、优化：RestTemplate+Ribbon (FeginClient)
