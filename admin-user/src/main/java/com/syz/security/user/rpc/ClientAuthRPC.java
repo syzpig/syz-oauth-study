@@ -10,7 +10,7 @@ import java.util.List;
 @FeignClient(name = "admin-auth",path = "client")  //这里先不上熔断，因为为测试打印日志
 public interface ClientAuthRPC {
     /**
-     * 获取拥有授权所有客户端 就是那些可以访问的客户端  也就是其他服务
+     * 获取拥有授权所有客户端 就是那些可以访问的客户端  也就是其他服务  首先去授权服务获取可访问列表
      */
     @RequestMapping(value = "/myClinet")
     public ObjectRestResponse<List<String>> getAllowedClient(@RequestParam("serviceId") String serviceId, @RequestParam("sceret") String sceret);

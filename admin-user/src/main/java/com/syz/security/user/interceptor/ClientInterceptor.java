@@ -37,6 +37,11 @@ public class ClientInterceptor extends HandlerInterceptorAdapter{
     private String clientSecret;
     /**
      *合法就通过，不合法就抛异常  合法后还要通过fegin rpc远程验证你有没有授权，能不能访问我
+     *
+     * 该拦截器的作用是，认证你传过来的token是否有效，一定死auth派发中心派发的token、
+     * 其次在认证你说否在我的访问授权列表中，在则往下走，否侧该客户端被拒绝
+     *根据其调取的客户端
+     * 网关会根据的客户端去获取token，然后放入请求头中，再去请求要请求的服务，再由被请求进行token校验  就是网关中过滤器的（申请客户端密钥头）这一步骤
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {

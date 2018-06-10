@@ -4,9 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.netflix.zuul.ZuulFilter;
 import com.netflix.zuul.context.RequestContext;
 import com.syz.security.common.constant.CommonConstants;
+import com.syz.security.common.exception.auth.ClientInvalidException;
 import com.syz.security.common.msg.BaseResponse;
+import com.syz.security.common.msg.ObjectRestResponse;
 import com.syz.security.common.util.jwt.IJWTInfo;
 import com.syz.security.zuul.jwt.JWTUtil;
+import com.syz.security.zuul.rpc.ClientAuthRPC;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -26,14 +29,14 @@ public class AccessFilter extends ZuulFilter {
     @Value("${jwt.token-header.jwtTokenHeader}")
     private String jwtTokenHeader;
 
-  /*  @Value("${client.id}")
+    @Value("${client.id}")
     private String clientId;
     @Value("${client.secret}")
     private String clientSecret;
     @Value("${client.token-header}")
-    private String clientTokenHeader;*/
- /*   @Autowired
-    private ClientAuthRpc clientAuthRpc;*/
+    private String clientTokenHeader;
+    @Autowired
+    private ClientAuthRPC clientAuthRpc;
 
     @Autowired
     private JWTUtil jwtUtil;
@@ -65,21 +68,24 @@ public class AccessFilter extends ZuulFilter {
             return null;
         String token = request.getHeader(jwtTokenHeader);//请求获取头部信息
         try {
+            //在mvcl拦截器认证授权年后，进入该网关，再去过去token进行用户认证
+
             // 验证用户合法性  验证token合法性
             IJWTInfo infoFromToken = jwtUtil.getInfoFromToken(token);
-            // todo 用户权限
+
+            // todo 下面是网关进行服务授权操作 用户权限  (二)该过滤器实现由网关进行服务鉴权
             // 申请客户端密钥头
-           /* BaseResponse resp = clientAuthRpc.getAccessToken(clientId, clientSecret);
+            BaseResponse resp = clientAuthRpc.getAccessToken(clientId, clientSecret);
             if(resp.getStatus() == 200){
                 ObjectRestResponse<String> clientToken = (ObjectRestResponse<String>) resp;
                 ctx.addZuulRequestHeader(clientTokenHeader,clientToken.getData());
             }else {
                 throw new ClientInvalidException("Gate client secret is Error");
-            }*/
-        }/* catch (ClientInvalidException ex){
+            }
+        } catch (ClientInvalidException ex){
             ctx.setResponseBody(JSON.toJSONString(new BaseResponse(ex.getStatus(), ex.getMessage())));
 
-        }*/ catch (Exception e) {
+        } catch (Exception e) {
             ctx.setResponseBody(JSON.toJSONString(new BaseResponse(CommonConstants.EX_TOKEN_ERROR_CODE, "Token error or Token is Expired！")));
             e.printStackTrace();
         }
