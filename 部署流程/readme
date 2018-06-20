@@ -1,0 +1,10 @@
+# 两种方式：
+1、通过jenkins  sh start on server   以脚本为主shell
+监听端口写sh脚本，看启动，超时等
+2、通过docker   docker run on container
+docker compose
+流程：
+1.提交代码到仓库，github
+2.通过手动或定时触发jenkins去通过maven构建,一种是构建成zip包，另一种是构成镜像，然后推到镜像docker仓库
+3.打成zip后推到目标服务，解压，后执行里面的sh脚本部署   ---》Jenkins
+4.打成镜像放入仓库后，然后poll inmage拉向镜像仓库到本地  然后启动对应物理机上的虚拟机docker run 启动服务  --》docker
