@@ -18,8 +18,8 @@ import javax.servlet.http.HttpServletResponse;
  *  创建mvc拦截器 初始化BaseContextHandler用户信息，
  *
  *  一般情况下，对来自浏览器的请求的拦截，是利用Filter实现的，这种方式可以实现Bean预处理、后处理。
- Spring MVC的拦截器不仅可实现Filter的所有功能，还可以更精确的控制拦截精度。
- Spring为我们提供了org.springframework.web.servlet.handler.HandlerInterceptorAdapter这个适配器，继承此类，可以非常方便的实现自己的拦截器
+ *  Spring MVC的拦截器不仅可实现Filter的所有功能，还可以更精确的控制拦截精度。
+ *  Spring为我们提供了org.springframework.web.servlet.handler.HandlerInterceptorAdapter这个适配器，继承此类，可以非常方便的实现自己的拦截器
  */
 @Configuration
 public class JWTInterceptor extends HandlerInterceptorAdapter{
