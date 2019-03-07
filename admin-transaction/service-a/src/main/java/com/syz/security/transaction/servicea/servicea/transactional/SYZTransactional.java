@@ -1,0 +1,45 @@
+package com.syz.security.transaction.servicea.servicea.transactional;
+
+/**
+ * 这是我们自己创建的事务,自己定义的事务
+ */
+public class SYZTransactional {
+    //那么这个事务中有什么东西呢？
+
+    //事务的Id 也就是事务他本身的ID,代表这个失事务是分布式事务中的子事务或者分支事务，他是属于这个groupId的
+    private String groupId;
+    // 然后有一个自己的id,
+    private String transactionId;
+    //还有一个是事务的状态，可以利用枚举
+    private TransactionType transactionType;
+
+    public SYZTransactional(String groupId, String transactionId, TransactionType transactionType) {
+        this.groupId = groupId;
+        this.transactionId = transactionId;
+        this.transactionType = transactionType;
+    }
+
+    public String getGroupId() {
+        return groupId;
+    }
+
+    public void setGroupId(String groupId) {
+        this.groupId = groupId;
+    }
+
+    public String getTransactionId() {
+        return transactionId;
+    }
+
+    public void setTransactionId(String transactionId) {
+        this.transactionId = transactionId;
+    }
+
+    public TransactionType getTransactionType() {
+        return transactionType;
+    }
+
+    public void setTransactionType(TransactionType transactionType) {
+        this.transactionType = transactionType;
+    }
+}
