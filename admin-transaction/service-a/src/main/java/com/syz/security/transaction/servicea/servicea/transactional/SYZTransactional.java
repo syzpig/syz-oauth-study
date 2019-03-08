@@ -13,10 +13,13 @@ public class SYZTransactional {
     //还有一个是事务的状态，可以利用枚举
     private TransactionType transactionType;
 
-    public SYZTransactional(String groupId, String transactionId, TransactionType transactionType) {
+    private Task task;  //一个事务有一个任务，这个用来阻塞事务提交或回滚的
+
+    public SYZTransactional(String groupId, String transactionId,Task task) {
         this.groupId = groupId;
         this.transactionId = transactionId;
-        this.transactionType = transactionType;
+        this.task = task; //每个事务初始化一个task
+
     }
 
     public String getGroupId() {

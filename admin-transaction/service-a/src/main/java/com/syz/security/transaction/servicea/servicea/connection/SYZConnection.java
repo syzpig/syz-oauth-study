@@ -1,21 +1,30 @@
 package com.syz.security.transaction.servicea.servicea.connection;
 
+import com.syz.security.transaction.servicea.servicea.transactional.SYZTransactional;
+import com.syz.security.transaction.servicea.servicea.transactional.TransactionType;
+import com.syz.security.transaction.servicea.servicea.utils.Task;
+
 import java.sql.*;
 import java.util.Map;
 import java.util.Properties;
 import java.util.concurrent.Executor;
 
 /**
- *手动实现数据库连接connection
+ * 手动实现数据库连接connection
  * 我们数据事务是基于连接的connect,所以我们要控制本地数据库事务，就要重写这个connection数据连接方法。
  */
-public class SYZConnection implements Connection{
+public class SYZConnection implements Connection {
     private Connection connection;
+    private Task task; //把task传进来
+    private SYZTransactional syzTransactional;
 
     public SYZConnection(Connection connection) {
         this.connection = connection;
     }
 
+    public Task getTask() {
+        return task;
+    }
 
     @Override
     public void commit() throws SQLException {
@@ -26,7 +35,27 @@ public class SYZConnection implements Connection{
         //至此解决了我们第一个问题，拿到了事务的控制权
 
         //wait........
-        connection.commit();
+        //那么这个等待怎么实现呢？  通过一个LOCK   阻塞，await()
+        // syzTransactional.getTask().waitTask();  //通过这一步，但是直接这么写是有问题的，因为这么写整个程序到此就被阻塞了
+        //，下面就没法再去运行，通知等等操作了，变成了死锁。
+        //所以可以通过多线程去操作
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                syzTransactional.getTask().waitTask();
+                try {
+                    if (syzTransactional.getTransactionType().equals(TransactionType.rollback)) {
+                        connection.rollback();
+                    } else {
+                        connection.commit();
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                    //todo 这里要考虑万一失败怎么？事务补偿机制
+                }
+            }
+        }).start();
+        //开辟新的线程去等待。主线程相当于啥也没干，spring这步的commit操作就想当啥也没做。
     }
 
     @Override
@@ -63,7 +92,6 @@ public class SYZConnection implements Connection{
     public boolean getAutoCommit() throws SQLException {
         return false;
     }
-
 
 
     @Override
@@ -123,17 +151,17 @@ public class SYZConnection implements Connection{
 
     @Override
     public Statement createStatement(int resultSetType, int resultSetConcurrency) throws SQLException {
-        return createStatement(resultSetType,resultSetConcurrency);
+        return createStatement(resultSetType, resultSetConcurrency);
     }
 
     @Override
     public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency) throws SQLException {
-        return prepareStatement(sql,resultSetType,resultSetConcurrency);
+        return prepareStatement(sql, resultSetType, resultSetConcurrency);
     }
 
     @Override
     public CallableStatement prepareCall(String sql, int resultSetType, int resultSetConcurrency) throws SQLException {
-        return prepareCall(sql,resultSetType,resultSetConcurrency);
+        return prepareCall(sql, resultSetType, resultSetConcurrency);
     }
 
     @Override
@@ -178,12 +206,12 @@ public class SYZConnection implements Connection{
 
     @Override
     public Statement createStatement(int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
-        return createStatement(resultSetType,resultSetConcurrency,resultSetHoldability);
+        return createStatement(resultSetType, resultSetConcurrency, resultSetHoldability);
     }
 
     @Override
     public PreparedStatement prepareStatement(String sql, int resultSetType, int resultSetConcurrency, int resultSetHoldability) throws SQLException {
-        return prepareStatement(sql,resultSetType,resultSetConcurrency,resultSetHoldability );
+        return prepareStatement(sql, resultSetType, resultSetConcurrency, resultSetHoldability);
     }
 
     @Override

@@ -9,8 +9,12 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>com.syz.security.transaction</groupId>
+
     <artifactId>admin-transaction</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>tx-manager</module>
+    </modules>
 
 
 </project>
