@@ -1,8 +1,10 @@
 package com.syz.security.transaction.servicea.servicea.transactional;
 
+import com.syz.security.transaction.servicea.servicea.netty.NettyClient;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.List;
 import java.util.UUID;
 
 /**
@@ -11,8 +13,10 @@ import java.util.UUID;
  */
 public class SYZTransactionalManager {
 
-    //定义一个nettiClinet客户端
+    //定义一个nettiClinet客户端 用来发送数据
     private static NettyClient nettyClient;  //用静态的原因是因为方法是静态的
+    //为什么要用Threadlocal因为要在同一个线程中不同地方使用事务对象  所以创建事务的时候就可以set进去
+    private static ThreadLocal<SYZTransactional> curr = new ThreadLocal<>();
 
     //这个客户端我们可以使用注入方式，但是是set注入
     @Autowired   //在这里注入，是因为对象传进来，赋给这个属性
@@ -38,7 +42,7 @@ public class SYZTransactionalManager {
     }
 
     //创建一个添加事务组的方法  参数一代表：你要创建的事务，参数二：你要添加到那个groupID中(这个参数在syzTransactional已经有了可以先不写)
-    public static SYZTransactional addSYZTransactionGroup(SYZTransactional syzTransactional, boolean isEnd,TransactionType transactionType) {
+    public static SYZTransactional addSYZTransactionGroup(SYZTransactional syzTransactional, boolean isEnd, TransactionType transactionType) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("groupId", syzTransactional.getGroupId());//添加事务首先先把groupID取出来，
         jsonObject.put("transaction", syzTransactional.getTransactionId());//指定当前是哪个事务组
@@ -53,7 +57,24 @@ public class SYZTransactionalManager {
      * 创建我们的事务方法
      */
     public static SYZTransactional createSyzTransaction(String groupId) {
-        String transactionId=UUID.randomUUID().toString();
-        SYZTransactional syzTransactional = new SYZTransactional(groupId,transactionId);
+        String transactionId = UUID.randomUUID().toString();
+        SYZTransactional syzTransactional = new SYZTransactional(groupId, transactionId);
+        curr.set(syzTransactional);//然后还要提供一个拿的方法
+        return syzTransactional;
+    }
+
+    /**
+     * 获取threadlocal中的对象
+     */
+    public static SYZTransactional getSyzTransaction() {
+        return curr.get();
+    }
+
+
+    /**
+     * 根据事务组中groupId获取本地事务中所有属于本事务组中的所有事务
+     */
+    public static List<SYZTransactional> getByGroupId(String groupId) {
+        return null;
     }
 }

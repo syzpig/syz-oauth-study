@@ -16,10 +16,13 @@ import java.util.concurrent.Executor;
 public class SYZConnection implements Connection {
     private Connection connection;
     private Task task; //把task传进来
-    private SYZTransactional syzTransactional;
+    private SYZTransactional syzTransactional;  //这个怎么传进来呢？要看这个事务在哪里生成的  在切面中,SYZConnection在哪里初始化的
+    //他是在SYZTransactionAspect这个切面中生成的，在SYZDataSourceAspect这个切面拿到的，他们是在同一个线程中 也就是同一个线程传入一个对象
+    //所以可以使用ThradLocal
 
-    public SYZConnection(Connection connection) {
+    public SYZConnection(Connection connection, SYZTransactional syzTransactional) {
         this.connection = connection;
+        this.syzTransactional = syzTransactional;
     }
 
     public Task getTask() {
@@ -42,13 +45,14 @@ public class SYZConnection implements Connection {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                syzTransactional.getTask().waitTask();
+                syzTransactional.getTask().waitTask();//加锁等待阻塞
                 try {
                     if (syzTransactional.getTransactionType().equals(TransactionType.rollback)) {
                         connection.rollback();
                     } else {
                         connection.commit();
                     }
+                    connection.close();
                 } catch (SQLException e) {
                     e.printStackTrace();
                     //todo 这里要考虑万一失败怎么？事务补偿机制

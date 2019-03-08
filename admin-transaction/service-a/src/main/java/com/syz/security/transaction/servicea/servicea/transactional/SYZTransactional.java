@@ -1,5 +1,7 @@
 package com.syz.security.transaction.servicea.servicea.transactional;
 
+import com.syz.security.transaction.servicea.servicea.utils.Task;
+
 /**
  * 这是我们自己创建的事务,自己定义的事务
  */
@@ -15,16 +17,22 @@ public class SYZTransactional {
 
     private Task task;  //一个事务有一个任务，这个用来阻塞事务提交或回滚的
 
-    public SYZTransactional(String groupId, String transactionId,Task task) {
+    public SYZTransactional(String groupId, String transactionId) {
         this.groupId = groupId;
         this.transactionId = transactionId;
-        this.task = task; //每个事务初始化一个task
+        this.task = new Task(); //每个事务初始化一个task
 
     }
 
     public String getGroupId() {
         return groupId;
     }
+
+    public Task getTask() {
+        return task;
+    }
+
+
 
     public void setGroupId(String groupId) {
         this.groupId = groupId;

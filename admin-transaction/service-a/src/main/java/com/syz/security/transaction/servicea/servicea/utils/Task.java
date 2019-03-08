@@ -19,7 +19,10 @@ public class Task {
     private Lock lock = new ReentrantLock();
     private Condition condition = lock.newCondition();
 
-    private void waitTask() {
+    /**
+     *阻塞
+     */
+    public void waitTask() {
         try {
             lock.lock();
             condition.await();
@@ -30,6 +33,9 @@ public class Task {
         }
     }
 
+    /**
+     *唤醒
+     */
     public void signalTask() {
         lock.lock();
         condition.signal();
