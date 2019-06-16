@@ -38,6 +38,11 @@ public class JWTInfo implements Serializable, IJWTInfo {
         this.name = name;
     }
 
+    /**
+     *@description 通过equals和hashcode判断  这里这两个参数就能判断用户是否是唯一的
+     *@param
+     *@return
+     */
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
