@@ -38,3 +38,29 @@ Service2，此时我们的Service2里面植入了一个mvc拦截器，他就会�
 如果我们内部没有服务鉴权的话，我们的内部就很通透，他可以去掉其他服务该金额等等违法操作。这样我们的服务内部是非常不安全的。
 
 
+
+在开源的Cloud-Platform项目中
+实战
+一、服务鉴权的具体使用流程
+也是包含两个拦截，一个是mvc拦截器和OkHttp连接器，（等价于feginClient拦截器）
+因为该平台是用OkHttp代替了feginClient进行fegin请求。
+
+该平台的服务鉴权服务做到了自动化的进行服务鉴权。因为他把服务鉴权的拦截器和token产生与操作的方式全都在服务鉴权中实现
+各个服务直接引入该服务拦截就可以完成服务鉴权，无需手动实现鉴权的判断与token解析判断等操作
+1、在服务鉴权的Auth-Client模块中有三个拦截器
+OkHttpTokenInterceptor      这就是鉴权中客户端服务拦截器  由他根据配置文件获取该服务标识生成token  然后放在请求头部
+ServiceAuthRestInterceptor  这就是鉴权中服务端服务拦截器  由他从请求Header中获取请求服务的token，解析token，获取该服务标识，然后与该服务可访问列表对比判断是否可以访问。
+UserAuthRestInterceptor     这就是用户拦截器，判断用户是否合法，web端拦截器
+
+2、token申请
+ServiceAuthUtil 他会读取配置中的关于服务鉴权的基础配置  
+该工具会自动刷新获取token
+
+其中AuthClientRunner  他实现了CommandLineRunner接口
+平常开发中有可能需要实现在项目启动后执行的功能，SpringBoot提供的一种简单的实现方案就是添加一个model并实现CommandLineRunner接口，实现功能的代码放在实现的run方法中
+在项目启动时他去初始化服务鉴权和用户认证公钥  里面携带用户或服务信息
+
+获取配置文件中客户服务和用户相关标识token等属性，的工具类在AutoConfiguration这个类中初始化。
+
+
+

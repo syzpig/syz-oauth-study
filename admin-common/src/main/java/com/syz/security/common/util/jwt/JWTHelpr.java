@@ -10,7 +10,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import org.joda.time.DateTime;
 
 /**
- * 这两个方法任何后端都可以调用，因此，给他提到公共类中
+ * 这两个方法任何后端都可以调用，因此，给他提到公共类中    加密token在网关那里进行
  */
 public class JWTHelpr {
     /**
