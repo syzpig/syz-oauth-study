@@ -63,4 +63,27 @@ ServiceAuthUtil 他会读取配置中的关于服务鉴权的基础配置
 获取配置文件中客户服务和用户相关标识token等属性，的工具类在AutoConfiguration这个类中初始化。
 
 
+二、用户校验流程
+1、JWT的请求与派发
+（1）.ace-auth-servr 模块中的AuthController 的createAuthenticationToken法 获取token
+（2）.AuthServiceImpl 的login 中通过Feign 远程调⽤进⾏账户密码有效性校验
+（3）.IUserService 中的validate ⽅法对应ace-admin 模块中的UserRest 中的validate ⽅
+法
+2、后端服务JWT解析
+  （1）.后端JWT的解析已经集成在ace-auth-client 模块中，我们只需要进⾏如下配置即可
+        <dependency>
+        <groupId>com.github.wxiaoqi</groupId>
+        <artifactId>ace-auth-client</artifactId>
+        <version>2.0-SNAPSHOT</version>
+        </dependency>
+  （2）.启动类添加注解
+      @EnableFeignClients({"com.github.wxiaoqi.security.auth.client.feign"})
+      @EnableAceAuthClient
+  （3）.配置拦截器
+      @Configuration("admimWebConfig")
+      @Primary
+      public class WebConfiguration implements WebMvcConfigurer {}
+      
+  （4）.利用⽤mvc拦截器对访问请求的header中的token进行有效性判断，具体
+  类：UserAuthRestInterceptor
 
