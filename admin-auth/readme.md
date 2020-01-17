@@ -48,7 +48,7 @@ Service2，此时我们的Service2里面植入了一个mvc拦截器，他就会�
 该平台的服务鉴权服务做到了自动化的进行服务鉴权。因为他把服务鉴权的拦截器和token产生与操作的方式全都在服务鉴权中实现
 各个服务直接引入该服务拦截就可以完成服务鉴权，无需手动实现鉴权的判断与token解析判断等操作
 1、在服务鉴权的Auth-Client模块中有三个拦截器
-OkHttpTokenInterceptor      这就是鉴权中客户端服务拦截器  由他根据配置文件获取该服务标识生成token  然后放在请求头部
+OkHttpTokenInterceptor      这就是鉴权中客户端服务拦截器  由他根据配置文件获取该服务标识生成token  然后放在请求头部  @AutoConfigureBefore(FeignAutoConfiguration.class)  在进行服务调用时，自动去鉴权中心拉取token,然后请求服务
 ServiceAuthRestInterceptor  这就是鉴权中服务端服务拦截器  由他从请求Header中获取请求服务的token，解析token，获取该服务标识，然后与该服务可访问列表对比判断是否可以访问。
 UserAuthRestInterceptor     这就是用户拦截器，判断用户是否合法，web端拦截器
 
